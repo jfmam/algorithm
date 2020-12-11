@@ -8,7 +8,7 @@ using namespace std;
 
 
 int dx[4] = { -1,0,1,0 };//x좌표이동
-int dy[4] = { 0,1,0,-1 };//y좌표 이동
+int dy[4] = { 0,1,0,-1 };//y좌표 이d동
 int arr[101][101];//배열의 정보를 담는다
 int main() {
 	ios_base::sync_with_stdio(false);//대량의 값을 빠르게 처리하는 방법
