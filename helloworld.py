@@ -1,4 +1,10 @@
 n = input()
 m = input()
+arr = []
+# arr = list(map(int, input().split()))
+for i in n:
+    arr.append(int(input()))
 
-arr = list(map(int, input().split()))
+
+print(n, m)
+print(arr)
