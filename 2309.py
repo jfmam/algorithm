@@ -1,7 +1,7 @@
 # https: // www.acmicpc.net/problem/2309
 s = []
 for i in range(9):
-    s.append(int(input()))
+    s.append(int(input())) 
 sum_s = sum(s)
 one = 0
 two = 0
@@ -15,3 +15,5 @@ s.remove(two)
 s.sort()
 for i in s:
     print(i)
+
+
