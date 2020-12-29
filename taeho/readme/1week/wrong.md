@@ -18,8 +18,10 @@ print("%d" % number)
 변수를 만드는 여러가지 방법이 있으며 구조를 분해 후 할당도 가능하다
 
 ```py
+a = 'hi'
 a, b = ('hello', 'world')
 a, b = ['hello', 'world']
 (a, b) = 'hello', 'world'
+[a, b] = ['hello', 'world']
 a = b = '하나의 값으로'
 ```
