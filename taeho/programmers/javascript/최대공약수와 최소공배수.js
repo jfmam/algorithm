@@ -1,13 +1,6 @@
-var solution = (n, m) => {
-  var max, min;
-  n >= m ? ((max = n), (min = m)) : ((max = m), (min = n));
-  var nmg;
-  do {
-    nmg = max % min;
-    if (!nmg) return [min, (n * m) / min];
-    else {
-      max = min;
-      min = nmg;
-    }
-  } while (true);
+const solution = (a, b) => {
+  const m = Math.min(a, b);
+  let gcm = 0;
+  for (let i = 1; i <= m; i++) if (a % i == 0 && b % i == 0) gcm = i;
+  return [gcm, (a * b) / gcm];
 };
