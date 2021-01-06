@@ -1,3 +1,3 @@
-a=1.1
-print(a)
+a=float(input())
+print('%f' % a)
 print(type(a))

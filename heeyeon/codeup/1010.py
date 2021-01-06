@@ -1,3 +1,3 @@
-a=1
+a=int(input())
 print(a)
 print(type(a))
