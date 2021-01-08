@@ -1,5 +1,2 @@
-a=input()
-for i in a:
-    print(i)
-
-
+a=int(input())
+print(a)
