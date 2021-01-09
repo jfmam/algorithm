@@ -1,2 +1,2 @@
-a=int(input())
-print(a)
+a=oct(input())
+print("%d" %a)
