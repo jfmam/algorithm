@@ -1,2 +1,2 @@
-a=oct(input())
+a=ord(input())
 print("%d" %a)
