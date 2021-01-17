@@ -1,11 +1,14 @@
-# N, r, c = map(int, input().split())
+N, r, c = map(int, input().split())
 
 
-# def zFunc(s, r, c):
-#     if s == 1:
-#         return 0
-#     s //= 2
-#     for i in range(2):
-#         for j in range(2):
-#             if r < s * (i+1) and c < s * (j+1):
-#                 return
+def zFunc(s, x, y):
+    s //= 2
+    if s == 0:
+        return 0
+    for i in range(2):
+        for j in range(2):
+            if x < s * (i + 1) and y < s * (j + 1):
+                return (i * 2 + j) * s * s + zFunc(s, x - s * i, y - s * j)
+
+
+print(zFunc(2 ** N, r, c))
