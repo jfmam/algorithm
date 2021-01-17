@@ -1,42 +1,73 @@
+# N = int(input())
+# graph = []
+# visit = [[False] * N for _ in range(N)]
+# iPos = [-1, +1, 0, 0]
+# jPos = [0, 0, -1, 1]
+# dngs = []
+# dng = 1
+
+# for _ in range(N):
+#     graph.append(list(map(int, input().strip(" "))))
+
+
+# def dfs(i, j):
+#     global dng
+#     visit[i][j] = True
+#     for p in range(4):
+#         newI, newJ = i + iPos[p], j + jPos[p]
+#         if newI < 0 or newI >= N or newJ < 0 or newJ >= N:
+#             continue
+#         elif graph[newI][newJ] != 1 or visit[newI][newJ]:
+#             continue
+#         else:
+#             dng += 1
+#             dfs(newI, newJ)
+
+
+# cnt = 0
+# for i in range(N):
+#     for j in range(N):
+#         if graph[i][j] == 1 and visit[i][j] == False:
+#             cnt += 1
+#             dfs(i, j)
+#             dngs.append(dng)
+#             dng = 1
+# print(cnt)
+# for i in sorted(dngs):
+#     print(i)
+
 N = int(input())
 graph = []
-for i in range(N):
-    graph.append(list(map(int, input().strip(""))))
-
-
-xPos = [-1, 1, 0, 0]
-yPos = [0, 0, -1, 1]
 visit = [[False] * N for _ in range(N)]
 dngs = []
-dng = 1
-count = 0
+dng = 0
+
+for _ in range(N):
+    graph.append(list(map(int, input().strip(" "))))
 
 
-def dfs(x, y):
-    visit[x][y] = True
+def dfs(i, j):
     global dng
-    for i in range(4):
-        newX = x + xPos[i]
-        newY = y + yPos[i]
-        if newX < 0 or newY < 0 or newX >= N or newY >= N:
-            continue
-        elif visit[newX][newY]:
-            continue
-        elif graph[newX][newY] != 1:
-            continue
-        else:
-            dng += 1
-            dfs(newX, newY)
-    return dng
+    if i < 0 or i >= N or j < 0 or j >= N:
+        return
+    if visit[i][j] or graph[i][j] == 0:
+        return
+    visit[i][j] = True
+    dng += 1
+    dfs(i + 1, j)
+    dfs(i - 1, j)
+    dfs(i, j + 1)
+    dfs(i, j - 1)
 
 
+cnt = 0
 for i in range(N):
     for j in range(N):
         if graph[i][j] == 1 and visit[i][j] == False:
-            count += 1
-            dngs.append(dfs(i, j))
-            dng = 1
-
-print(count)
+            cnt += 1
+            dfs(i, j)
+            dngs.append(dng)
+            dng = 0
+print(cnt)
 for i in sorted(dngs):
     print(i)
