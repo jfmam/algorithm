@@ -1,26 +1,42 @@
-var rl = require("readline").createInterface({ input: process.stdin, output: process.stdout });
-var input = [];
+const rl = require("readline").createInterface({ input: process.stdin, output: process.stdout });
+
+const input = [];
 rl.on("line", line => {
   input.push(line);
 }).on("close", () => {
-  const [n, m, v] = input.shift().split(" ");
-  const adj = Array.from(Array(+n + 1), () => new Array());
-  for (let item of input) {
-    const [x, y] = item.split(" ");
-    adj[x].push(y);
-    adj[y].push(x);
-  }
-  for (let item of adj) item.sort((a, b) => a - b);
-  let result = dfs(
-    +v,
-    adj,
-    Array.from(Array(+n + 1), () => false),
-  );
-  console.log(result);
+  var [n, m, v] = input
+    .shift()
+    .split(" ")
+    .map(e => +e);
+  var arr = Array.from(Array(n + 1), () => []);
+  input.some(e => {
+    var [x, y] = e.split(" ").map(e => +e);
+    arr[x].push(y);
+    arr[y].push(x);
+  });
+  for (let i of arr) i.sort((a, b) => a - b);
+  let visited = new Array(n + 1).fill(false);
+  let dfsResult = "";
+  let bfsResult = "";
+  const dfs = v => {
+    if (visited[v]) return;
+    visited[v] = true;
+    dfsResult += v + " ";
+    for (let i of arr[v]) dfs(i);
+  };
+  const bfs = v => {
+    let q = [v];
+    while (q.length) {
+      let item = q.shift();
+      if (visited[item]) continue;
+      visited[item] = true;
+      bfsResult += item + " ";
+      for (let i of arr[item]) q.push(i);
+    }
+  };
+  dfs(v);
+  visited = new Array(n + 1).fill(false);
+  bfs(v);
+  console.log(dfsResult);
+  console.log(bfsResult);
 });
-
-function dfs(v, adj, visited) {
-  visited[v] = true;
-  for (let item of adj[v]) if (!visited[item]) return v + dfs(item, visited);
-  return "";
-}
