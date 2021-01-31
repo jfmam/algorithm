@@ -1,73 +1,33 @@
-# N = int(input())
-# graph = []
-# visit = [[False] * N for _ in range(N)]
-# iPos = [-1, +1, 0, 0]
-# jPos = [0, 0, -1, 1]
-# dngs = []
-# dng = 1
+def dfs(x, y):
+    global dange
+    if x < 0 or x >= N or y < 0 or y >= N:
+        return
+    if not graph[x][y] or visited[x][y]:
+        return
+    visited[x][y] = True
+    dange += 1
+    dfs(x - 1, y)
+    dfs(x + 1, y)
+    dfs(x, y - 1)
+    dfs(x, y + 1)
 
-# for _ in range(N):
-#     graph.append(list(map(int, input().strip(" "))))
-
-
-# def dfs(i, j):
-#     global dng
-#     visit[i][j] = True
-#     for p in range(4):
-#         newI, newJ = i + iPos[p], j + jPos[p]
-#         if newI < 0 or newI >= N or newJ < 0 or newJ >= N:
-#             continue
-#         elif graph[newI][newJ] != 1 or visit[newI][newJ]:
-#             continue
-#         else:
-#             dng += 1
-#             dfs(newI, newJ)
-
-
-# cnt = 0
-# for i in range(N):
-#     for j in range(N):
-#         if graph[i][j] == 1 and visit[i][j] == False:
-#             cnt += 1
-#             dfs(i, j)
-#             dngs.append(dng)
-#             dng = 1
-# print(cnt)
-# for i in sorted(dngs):
-#     print(i)
 
 N = int(input())
 graph = []
-visit = [[False] * N for _ in range(N)]
-dngs = []
-dng = 0
-
 for _ in range(N):
-    graph.append(list(map(int, input().strip(" "))))
-
-
-def dfs(i, j):
-    global dng
-    if i < 0 or i >= N or j < 0 or j >= N:
-        return
-    if visit[i][j] or graph[i][j] == 0:
-        return
-    visit[i][j] = True
-    dng += 1
-    dfs(i + 1, j)
-    dfs(i - 1, j)
-    dfs(i, j + 1)
-    dfs(i, j - 1)
-
+    graph.append(list(map(int, list(input()))))
 
 cnt = 0
+dange = 0
+dangeArr = []
+visited = [[False] * N for _ in range(N)]
 for i in range(N):
     for j in range(N):
-        if graph[i][j] == 1 and visit[i][j] == False:
+        if graph[i][j] and not visited[i][j]:
             cnt += 1
             dfs(i, j)
-            dngs.append(dng)
-            dng = 0
+            dangeArr.append(dange)
+            dange = 0
 print(cnt)
-for i in sorted(dngs):
+for i in sorted(dangeArr):
     print(i)
