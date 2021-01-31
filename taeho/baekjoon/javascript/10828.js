@@ -11,4 +11,5 @@ for (let i = 1; i < inp.length; i++) {
   else if (arr[0] == "empty") result += (len == 0 ? 1 : 0) + "\n";
   else if (arr[0] == "top") result += (len == 0 ? -1 : stack[len - 1]) + "\n";
 }
+
 console.log(result);

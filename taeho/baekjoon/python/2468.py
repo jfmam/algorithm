@@ -1,44 +1,41 @@
 import sys
-
 sys.setrecursionlimit(10 ** 6)
 rl = sys.stdin.readline
 
-
 def dfs(x, y):
-    if x < 0 or x >= n or y < 0 or y >= n or visited[x][y]:
+    if x < 0 or x >= N or y < 0 or y >= N:
         return
-    if local[x][y] == 0:
+    if temp_graph[x][y] == 0 or visited[x][y]:
         return
     visited[x][y] = True
-    dfs(x - 1, y)
-    dfs(x + 1, y)
-    dfs(x, y - 1)
-    dfs(x, y + 1)
+    dfs(x-1, y)
+    dfs(x+1, y)
+    dfs(x, y-1)
+    dfs(x, y+1)
 
+N = int(rl())
+graph = []
+all_height = []
+for _ in range(N):
+    li = list(map(int, rl().split()))
+    graph.append(li)
+    all_height += li
 
-n = int(rl())
-arr = []
-maxHeight = []
-for _ in range(n):
-    l = list(map(int, rl().split()))
-    maxHeight.append(max(l))
-    arr.append(l)
-maxH = max(maxHeight)
-local = [[1 for _ in range(n)] for _ in range(n)]
-maxLocal = []
-visited = [[False for _ in range(n)] for _ in range(n)]
-cnt = 0
+all_height = list(range(max(all_height)+1))
+cnt_arr = []
 
-for s in range(maxH + 1):
-    for i in range(n):
-        for j in range(n):
-            if arr[i][j] <= s:
-                local[i][j] = 0
-    for i in range(n):
-        for j in range(n):
-            cnt += 1
-            dfs(i, j)
-    maxLocal.append(cnt)
+for height in all_height:
+    visited = [[False] * N for _ in range(N)]
+    temp_graph = [[1] * N for _ in range(N)]
     cnt = 0
-    visited = [[False for _ in range(n)] for _ in range(n)]
-print(max(maxLocal))
+    for i in range(N):
+        for j in range(N):
+            if graph[i][j] <= height:
+                temp_graph[i][j] = 0
+    for i in range(N):
+        for j in range(N):
+            if not visited[i][j] and temp_graph[i][j] == 1:
+                dfs(i, j)
+                cnt += 1
+    cnt_arr.append(cnt)
+print(max(cnt_arr))
