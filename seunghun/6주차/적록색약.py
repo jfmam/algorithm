@@ -19,7 +19,7 @@ def bfs(x, y): #
         for k in range(4):
             xx = i + dx[k]
             yy = j + dy[k]
-            if 0 <= xx < n and 0 <= yy < n:
+            if 0 <= xx < n and 0 <= yy < n: # 핵심
                 if ch[xx][yy] == 0 and arr[x][y] == arr[xx][yy]:
                     queue.append([xx, yy])
                     ch[xx][yy] = 1
@@ -30,7 +30,7 @@ for i in range(n):
     for j in range(n):
         if ch[i][j] == 0:
             bfs(i, j)
-print(cnt, end=' ')
+print(cnt, end=' ') #end 값을 설정하여 한칸 띄어서 출력이 가능하다.
 cnt = 0
 for i in range(n):
     for j in range(n):
