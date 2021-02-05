@@ -1,13 +1,13 @@
-const readline = require('readline');
+const readline = require("readline");
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
 let input = [];
-rl.on('line', line => {
+rl.on("line", line => {
   input.push(line);
-}).on('close', () => {
+}).on("close", () => {
   const N = +input[0];
   console.log(factorial(N));
 });
