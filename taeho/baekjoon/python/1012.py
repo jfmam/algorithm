@@ -1,41 +1,30 @@
 import sys
-
-sys.setrecursionlimit(10000)
+sys.setrecursionlimit(10**6)
 rl = sys.stdin.readline
-
-arr = []
-visit = []
-xPos = [1, 0, -1, 0]
-yPos = [0, 1, 0, -1]
-
-
 def dfs(x, y):
-    global arr, visit
-    visit[x][y] = True
-    for i in range(4):
-        newX, newY = x + xPos[i], y + yPos[i]
-        if arr[newX][newY] == 0 or visit[newX][newY]:
-            continue
-        dfs(newX, newY)
-
-
-def main():
-    global arr, visit
-    result = 0
-    M, N, K = map(int, rl().split())
-    arr = [[0 for _ in range(M + 2)] for _ in range(N + 2)]
-    visit = [[False for _ in range(M + 2)] for _ in range(N + 2)]
-    for _ in range(K):
-        X, Y = map(int, rl().split())
-        arr[Y + 1][X + 1] = 1
-    for i in range(1, N + 1):
-        for j in range(1, M + 1):
-            if arr[i][j] == 0 or visit[i][j]:
-                continue
-            dfs(i, j)
-            result += 1
-    print(result)
-
+    if x < 0 or x >= n or y < 0 or y >= m:
+        return
+    if not board[x][y] or visited[x][y]:
+        return
+    visited[x][y] = True
+    dfs(x-1, y)
+    dfs(x+1, y)
+    dfs(x, y-1)
+    dfs(x, y+1)
 
 for _ in range(int(rl())):
-    main()
+    m, n, k = map(int, rl().split())
+    board = [[0] * m for _ in range(n)]
+
+    for _ in range(k):
+        y, x = map(int, rl().split())
+        board[x][y] = 1
+    
+    visited = [[False] * m for _ in range(n)]
+    cnt = 0
+    for i in range(n):
+        for j in range(m):
+            if board[i][j] == 1 and not visited[i][j]:
+                dfs(i, j)
+                cnt += 1
+    print(cnt)
