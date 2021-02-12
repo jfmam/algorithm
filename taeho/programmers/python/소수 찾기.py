@@ -1,17 +1,25 @@
-def solution(n):
-    arr = list(range(2, n + 1))
-    count = 0
-    for i in arr:
-        if i == 0:
-            continue
-        count += 1
-        for j in range(i, n + 1, i):
-            if arr[j] == 0:
-                continue
-            arr[j] = 0
-    return count
+import itertools
 
-# 테스트 1 〉	통과 (233.61ms, 46.5MB)
-# 테스트 2 〉	통과 (246.55ms, 45.1MB)
-# 테스트 3 〉	통과 (237.53ms, 46.1MB)
-# 테스트 4 〉	통과 (264.77ms, 45.6MB)
+# * 소수 확인
+def isPrime(num):
+    if num <= 2: return False
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0: return False
+    return True
+
+def solution(numbers):
+    numArr = list(numbers)
+    N = len(numArr) # 숫자의 개수
+
+    # * 소수들의 집합
+    primeSet = set()
+    for i in numArr: 
+        if int(i) in (2,3,5,7): primeSet.add(int(i))
+    for i in range(2, N+1):
+        # * 순열 리스트
+        PA = list(itertools.permutations(numArr, i))
+        for pair in PA:
+            num = int("".join(pair))
+            if isPrime(int("".join(pair))): 
+                primeSet.add(num)
+    return len(primeSet)
