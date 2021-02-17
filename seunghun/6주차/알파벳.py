@@ -3,13 +3,13 @@ import sys
 
 def dfs(x, y, ans):
     global answer
-    answer = max(ans, answer)
+    answer = max(ans, answer) #if문이 없는 경우를 항상 고려한다.
 
     for i in range(4):
         xx = x + dx[i]
         yy = y + dy[i]
         if 0 <= xx < r and 0 <= yy < c:
-            if not alpha[ord(arr[xx][yy]) - 65]:
+            if not alpha[ord(arr[xx][yy]) - 65]: #ord 내장함수
                 alpha[ord(arr[xx][yy]) - 65] = 1
                 dfs(xx, yy, ans + 1)
                 alpha[ord(arr[xx][yy]) - 65] = 0
