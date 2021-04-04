@@ -6,12 +6,13 @@ def solution(n):
     row, col = 0, -1
     num = 1
     for i in range(n):
+        direction = i % 3
         for j in range(i, n):
-            if i % 3 == 0:
+            if direction == 0: # direction down
                 col += 1
-            elif i % 3 == 1:
+            elif direction == 1: # direction right
                 row += 1
-            else:
+            else: # direction up
                 col -= 1
                 row -= 1
             arr[col][row] =  num
