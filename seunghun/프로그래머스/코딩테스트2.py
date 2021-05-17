@@ -16,10 +16,8 @@ def solution(r, c):
             for i in range(2):
                 dx = xx + x[i]
                 dy = yy + y[i]
-                if ch[xx][yy] == 0 and 0 < dx <= c and 0 < dy <= r:
-                    ch[xx][yy] = 1
+                if  dx <= c and 0 < dy <= r:
                     DFS(dx, dy, dis+1)
-                    ch[xx][yy] = 0
     DFS(1, 1, 0)
 
     return cnt
